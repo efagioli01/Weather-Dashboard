@@ -1,8 +1,26 @@
-.hide {
-    display: none;
-}
+.favorable {
+    background-color: hsla(54, 88%, 60%, 0.925);
+    width: 10%;
+    color: white;
+  }
+  
+  .severe {
+    background-color: #ff6961;
+    width: 10%;
+    color: white;
+  }
+  
+  .moderate {
+    background-color: #77dd77;
+    width: 10%;
+    color: white;
+  }
 
-.show {
-    display: block;
-}
+  .jumbotron{
+      text-align: center;
+      color: crimson;
+  }
 
+  /* .list-group-item{
+
+  } */

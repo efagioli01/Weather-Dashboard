@@ -4,6 +4,17 @@ $(document).ready(function () {
 
     let date = new Date();
 
+    let pastCities = localStorage.getItem('city') //local storage only takes a string
+    if (pastCities == null) {
+        pastCities = []
+    } else {
+        pastCities = JSON.parse(pastCities)
+    }
+    // for loop to add past cities to the page   
+    for (i = 0; i < pastCities.length; i++) {
+        pastCities[i].textContent = "pastSearch";
+    }
+
     $("#searchCity").keypress(function (event) {
         if (event.kayCode === 13) {
             event.preventDefault();
@@ -16,34 +27,14 @@ $(document).ready(function () {
         let city = $("#searchCity").val();
         if (city) {
             searchWeather(city);
+            pastCities.push(city)
+            localStorage.setItem('city', JSON.stringify(pastCities))
         }
 
     });
 
-    // var history = JSON.parse(localStorage.getItem('"history')) || [];
 
-    // if (history.length > 0) {
-    //     weatherFunction(history[historylength -1]);
-    // }
 
-    // for (var i = 0; i < history.length; i++) {
-    //     createRow(history[1]);
-    // }
-
-    // function createRow(text) {
-    //     var listItem =$("<li>").addClass("list-group-item").text(text);
-    //     $(".history").append(listItem);
-    // }
-
-    // $(".history").on("click", "li", function() {
-    //     weatherFunction($(this).text());
-    //     weatherForecast($(this).text());
-
-    // });
-    // function weatherFunction(searchTerm) {
-    // }
-
-    
 
     function searchWeather(city) {
 
@@ -77,8 +68,8 @@ $(document).ready(function () {
 
                 humidEl.textContent = `humidity : ${Math.round(data.main.humidity)} %`
 
-                tempEl.textContent = `temperature : ${Math.round(data.main.temp)}` 
-                
+                tempEl.textContent = `temperature : ${Math.round(data.main.temp)}`
+
 
                 windEl.textContent = `wind : ${Math.round(data.wind.speed)} mph`
 
@@ -93,7 +84,7 @@ $(document).ready(function () {
                 cardBodyEl.appendChild(humidEl)
                 cardEl.appendChild(cardBodyEl)
                 todayEl.appendChild(cardEl)
-            
+
 
                 function getUVIndex(lat, lon) {
                     let UVQueryURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
@@ -111,39 +102,52 @@ $(document).ready(function () {
                             cardBodyEl.appendChild(uvEl)
 
                             function getuvColor() {
+                                let uvColor = data.current.uvi
 
-                                if(uvEl <= 2){
-                                   uvEl.addClass = ("favorable")
-                               }
-                               
-                               else if(uvEl >2 && uvEl <=7){
-                                   uvEl.addClass = ("moderate")
-                               }
-                               
-                               else if(uvEl >8) {
-                                   uvEl.addClass = ("severe")
-                               };
-               
-                           }
-                           getuvColor()
+                                if (uvColor <= 2) {
+                                    uvEl.classList.add("favorable")
+                                }
+
+                                else if
+                                    (uvColor > 2 && uvColor <= 7) {
+                                    uvEl.classList.add("moderate")
+                                }
+
+                                else if (uvColori > 8) {
+                                    uvEl.classList.add("severe")
+                                };
+
+
+                            }
+                            getuvColor()
 
                         })
-                        
+
                 }
 
                 getUVIndex(data.coord.lat, data.coord.lon)
 
+                // function getFiveDay(city) {
+                //     // let APIKey = "3c93e73d72c848cc06d03b3131ddc61f";
+                //     let forecastQueryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`
+                //     fetch(forecastQueryURL)
+                //         .then(res => res.json())
+                //         .then(data => {
+                //             console.log(data)
+                //         })
+                // };
 
+                // getFiveDay();
             });
 
+       
+        
     }
+    
+
+
 
 })
-
-
-
-//for 5 day forecast
-// let forecastQueryURL= `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`
 
 
 
