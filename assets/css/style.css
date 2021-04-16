@@ -21,6 +21,12 @@
       color: crimson;
   }
 
-  /* .list-group-item{
+  button {
+    display: flex;
+    justify-content: space-around;
+    line-height: 50px;
+    background-color: cornflowerblue;
+    font-size: 1rem;
+    font-weight: bold;
+  }
 
-  } */

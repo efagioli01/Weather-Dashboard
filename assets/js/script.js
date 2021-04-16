@@ -12,7 +12,13 @@ $(document).ready(function () {
     }
     // for loop to add past cities to the page   
     for (i = 0; i < pastCities.length; i++) {
-        pastCities[i].textContent = "pastSearch";
+        // pastCities[i].textContent = "pastSearch";
+        let historyEl= $("#history"); 
+        let city=pastCities[i]
+        let li = $('<button>').text(pastCities[i]).on('click', function(){
+            searchWeather(city)
+        })
+        historyEl.append(li)
     }
 
     $("#searchCity").keypress(function (event) {
@@ -148,6 +154,4 @@ $(document).ready(function () {
 
 
 })
-
-
 
