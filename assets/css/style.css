@@ -1,32 +1,52 @@
 .favorable {
-    background-color: hsla(54, 88%, 60%, 0.925);
-    width: 10%;
-    color: white;
-  }
-  
-  .severe {
-    background-color: #ff6961;
-    width: 10%;
-    color: white;
-  }
-  
-  .moderate {
-    background-color: #77dd77;
-    width: 10%;
-    color: white;
-  }
+  background-color: hsla(54, 88%, 60%, 0.925);
+  width: 10%;
+  color: white;
+}
 
-  .jumbotron{
-      text-align: center;
-      color: crimson;
-  }
+.severe {
+  background-color: #ff6961;
+  width: 10%;
+  color: white;
+}
 
-  button {
-    display: flex;
-    justify-content: space-around;
-    line-height: 50px;
-    background-color: cornflowerblue;
-    font-size: 1rem;
-    font-weight: bold;
-  }
+.moderate {
+  background-color: #77dd77;
+  width: 10%;
+  color: white;
+}
+
+.jumbotron{
+    text-align: center;
+    color: crimson;
+}
+
+button {
+  display: flex;
+  justify-content: space-around;
+  line-height: 50px;
+  background-color: cornflowerblue;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.card {
+  width: 50%;
+  background-color: paleturquoise
+}
+
+/* .card-text {
+  text-align: center;
+  width: 30%;
+
+} */
+
+.card2 {
+  width: 25%;
+  background-color: paleturquoise
+}
+
+#forecast {
+  justify-content: space-between;
+}
 

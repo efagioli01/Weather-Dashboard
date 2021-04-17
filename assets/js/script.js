@@ -4,18 +4,17 @@ $(document).ready(function () {
 
     let date = new Date();
 
-    let pastCities = localStorage.getItem('city') //local storage only takes a string
+    let pastCities = localStorage.getItem('city') 
     if (pastCities == null) {
         pastCities = []
     } else {
         pastCities = JSON.parse(pastCities)
     }
-    // for loop to add past cities to the page   
+      
     for (i = 0; i < pastCities.length; i++) {
-        // pastCities[i].textContent = "pastSearch";
-        let historyEl= $("#history"); 
-        let city=pastCities[i]
-        let li = $('<button>').text(pastCities[i]).on('click', function(){
+        let historyEl = $("#history");
+        let city = pastCities[i]
+        let li = $('<button>').text(pastCities[i]).on('click', function () {
             searchWeather(city)
         })
         historyEl.append(li)
@@ -39,16 +38,13 @@ $(document).ready(function () {
 
     });
 
-
-
-
     function searchWeather(city) {
 
         let endPoint = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
         fetch(endPoint)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
 
                 let todayEl = document.getElementById("today")
                 todayEl.textContent = ""
@@ -98,9 +94,62 @@ $(document).ready(function () {
                         .then(res => res.json())
                         .then(data => {
                             console.log(data)
-                            console.log(lat, lon)
-                            console.log(data.current.uvi)
+                            // console.log(lat, lon)
+                            // console.log(data.current.uvi)
+                            for (let day of data.daily) {
+                                
+                               
+                               let date = new Date(day.dt *1000) 
+                                
+                               day.weather
+                               day.humidity
+                               day.temp.day
+                               day.wind_speed
+                               day.weather[0].icon
 
+                               
+                               let forecastEl = document.getElementById("forecast")
+               
+                               let forecastTitleEl = document.createElement('h3')
+                               forecastTitleEl.classList.add('card-title')
+                               forecastTitleEl.textContent =  `${new Date(day.dt*1000).toLocaleDateString()}`
+
+                               let newCardEl = document.createElement('div')
+                               newCardEl.classList.add('card2')
+
+                               let newCardBodyEl = document.createElement('div')
+                                newCardBodyEl.classList.add('card-body')
+
+                                let newHumidEl = document.createElement('p')
+                                newHumidEl.classList.add('card-text')
+
+                                let newTempEl = document.createElement('p')
+                                newTempEl.classList.add('card-text')
+
+                                let newWindEl = document.createElement('p')
+                                newWindEl.classList.add('card-text')
+
+                                newHumidEl.textContent = `humidity : ${Math.round(day.humidity)} %`
+
+                                newTempEl.textContent = `temperature : ${Math.round(day.temp.day)}`
+
+                                newWindEl.textContent = `wind : ${Math.round(day.wind_speed)} mph`
+
+                                let newImgEl = document.createElement('img')
+                                newImgEl.setAttribute('src', `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`)
+
+                                newCardBodyEl.appendChild(forecastTitleEl)
+                                newCardBodyEl.appendChild(newTempEl)
+                                newCardBodyEl.appendChild(newHumidEl)
+                                newCardEl.appendChild(newCardBodyEl)
+                                forecastEl.appendChild(newCardEl)
+                                newCardBodyEl.appendChild(newWindEl)
+                                forecastTitleEl.appendChild(newImgEl)
+
+
+                            }
+
+            
                             let uvEl = document.createElement('p')
                             uvEl.classList.add('card-text')
                             uvEl.textContent = `uv index : ${Math.round(data.current.uvi)}`
@@ -119,39 +168,48 @@ $(document).ready(function () {
                                     uvEl.classList.add("moderate")
                                 }
 
-                                else if (uvColori > 8) {
+                                else if (uvColor > 8) {
                                     uvEl.classList.add("severe")
                                 };
 
+                               
 
                             }
                             getuvColor()
 
                         })
-
+                          
                 }
 
-                getUVIndex(data.coord.lat, data.coord.lon)
+                getUVIndex(data.coord.lat, data.coord.lon);
 
-                // function getFiveDay(city) {
-                //     // let APIKey = "3c93e73d72c848cc06d03b3131ddc61f";
-                //     let forecastQueryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`
-                //     fetch(forecastQueryURL)
-                //         .then(res => res.json())
-                //         .then(data => {
-                //             console.log(data)
-                //         })
-                // };
+                
+                
+                
 
-                // getFiveDay();
+                      
+                          
+               
+                
+
+               
+
+
             });
 
-       
-        
+
+
+
+
     }
-    
+
+
+
+
 
 
 
 })
+
+
 
