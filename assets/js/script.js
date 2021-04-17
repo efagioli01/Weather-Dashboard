@@ -93,26 +93,40 @@ $(document).ready(function () {
                     fetch(UVQueryURL)
                         .then(res => res.json())
                         .then(data => {
-                            console.log(data)
+                            // console.log(data)
                             // console.log(lat, lon)
                             // console.log(data.current.uvi)
-                            for (let day of data.daily) {
+                            
+                            // for (let day of data.daily) {
                                 
+
+                                for (let i = 1; i < 6; i++) {
+                                    data.daily[i].weather
+                                    data.daily[i].humidity
+                                    data.daily[i].temp.day
+                                    data.daily[i].wind_speed
+                                    data.daily[i].weather[0].icon
+
+                                    console.log(data.daily[i])
+
+                                    
                                
-                               let date = new Date(day.dt *1000) 
-                                
-                               day.weather
-                               day.humidity
-                               day.temp.day
-                               day.wind_speed
-                               day.weather[0].icon
+                               let date = new Date(data.daily[i].dt *1000) 
+
+                                   
+                            
+                            //    day.weather
+                            //    day.humidity
+                            //    day.temp.day
+                            //    day.wind_speed
+                            //    day.weather[0].icon
 
                                
                                let forecastEl = document.getElementById("forecast")
                
                                let forecastTitleEl = document.createElement('h3')
                                forecastTitleEl.classList.add('card-title')
-                               forecastTitleEl.textContent =  `${new Date(day.dt*1000).toLocaleDateString()}`
+                               forecastTitleEl.textContent =  `${new Date(data.daily[i].dt*1000).toLocaleDateString()}`
 
                                let newCardEl = document.createElement('div')
                                newCardEl.classList.add('card2')
@@ -129,14 +143,14 @@ $(document).ready(function () {
                                 let newWindEl = document.createElement('p')
                                 newWindEl.classList.add('card-text')
 
-                                newHumidEl.textContent = `humidity : ${Math.round(day.humidity)} %`
+                                newHumidEl.textContent = `humidity : ${Math.round(data.daily[i].humidity)} %`
 
-                                newTempEl.textContent = `temperature : ${Math.round(day.temp.day)}`
+                                newTempEl.textContent = `temperature : ${Math.round(data.daily[i].temp.day)}`
 
-                                newWindEl.textContent = `wind : ${Math.round(day.wind_speed)} mph`
+                                newWindEl.textContent = `wind : ${Math.round(data.daily[i].wind_speed)} mph`
 
                                 let newImgEl = document.createElement('img')
-                                newImgEl.setAttribute('src', `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`)
+                                newImgEl.setAttribute('src', `http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}.png`)
 
                                 newCardBodyEl.appendChild(forecastTitleEl)
                                 newCardBodyEl.appendChild(newTempEl)
@@ -146,8 +160,10 @@ $(document).ready(function () {
                                 newCardBodyEl.appendChild(newWindEl)
                                 forecastTitleEl.appendChild(newImgEl)
 
-
+                                
                             }
+                            
+                            
 
             
                             let uvEl = document.createElement('p')
@@ -180,6 +196,7 @@ $(document).ready(function () {
                         })
                           
                 }
+            
 
                 getUVIndex(data.coord.lat, data.coord.lon);
 
@@ -210,6 +227,5 @@ $(document).ready(function () {
 
 
 })
-
 
 
