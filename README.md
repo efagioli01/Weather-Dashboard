@@ -29,7 +29,13 @@ The user is also able to click on a city in the search history and again be pres
 *OpenWeather One Call API
 
 
-#Screenshot
+#Screenshots
+
+![screenshot](./assets/images/weather1.PNG)
+![screenshot](./assets/images/weather2.PNG)
 
 
 ## Deployment Links
+
+* [GitHub Repository]()
+* [Deployed Application]()

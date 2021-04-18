@@ -44,7 +44,7 @@ $(document).ready(function () {
         fetch(endPoint)
             .then(res => res.json())
             .then(data => {
-                // console.log(data)
+                
 
                 let todayEl = document.getElementById("today")
                 todayEl.textContent = ""
@@ -93,12 +93,7 @@ $(document).ready(function () {
                     fetch(UVQueryURL)
                         .then(res => res.json())
                         .then(data => {
-                            // console.log(data)
-                            // console.log(lat, lon)
-                            // console.log(data.current.uvi)
-                            
-                            // for (let day of data.daily) {
-                                
+                      
 
                                 for (let i = 1; i < 6; i++) {
                                     data.daily[i].weather
@@ -111,18 +106,12 @@ $(document).ready(function () {
 
                                     
                                
-                               let date = new Date(data.daily[i].dt *1000) 
+                               let date = new Date(data.daily[i].dt *1000)
 
-                                   
-                            
-                            //    day.weather
-                            //    day.humidity
-                            //    day.temp.day
-                            //    day.wind_speed
-                            //    day.weather[0].icon
+                    
 
-                               
                                let forecastEl = document.getElementById("forecast")
+                            
                
                                let forecastTitleEl = document.createElement('h3')
                                forecastTitleEl.classList.add('card-title')
@@ -132,7 +121,7 @@ $(document).ready(function () {
                                newCardEl.classList.add('card2')
 
                                let newCardBodyEl = document.createElement('div')
-                                newCardBodyEl.classList.add('card-body')
+                                newCardBodyEl.classList.add('card-body2')
 
                                 let newHumidEl = document.createElement('p')
                                 newHumidEl.classList.add('card-text')
@@ -159,12 +148,10 @@ $(document).ready(function () {
                                 forecastEl.appendChild(newCardEl)
                                 newCardBodyEl.appendChild(newWindEl)
                                 forecastTitleEl.appendChild(newImgEl)
-
                                 
                             }
                             
                             
-
             
                             let uvEl = document.createElement('p')
                             uvEl.classList.add('card-text')
